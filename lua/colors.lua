@@ -1,0 +1,1 @@
+/home/distek/.cache/wal/colors.lua
