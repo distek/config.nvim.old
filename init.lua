@@ -9,5 +9,5 @@ require("plugin-confs")
 require("language-confs")
 require("functions")
 require("mappings")
-
 require("theme")
+require("lualine-conf")

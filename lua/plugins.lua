@@ -25,7 +25,7 @@ require("packer").config = {
 --}}}
 
 -- Plugins{{{
-require('packer').startup(function()
+return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     -- Modes{{{
         use 'simeji/winresizer'
@@ -60,33 +60,12 @@ require('packer').startup(function()
         use 'p00f/nvim-ts-rainbow'
 
         -- Themes
-        use 'EdenEast/nightfox.nvim'
-        use 'navarasu/onedark.nvim'
-        use 'shaunsingh/nord.nvim'
-        use 'morhetz/gruvbox'
-        use 'marko-cerovac/material.nvim'
-        use ({
-            "atalazer/wally.nvim",
-            run = "cp ./extra/wal/colors.lua ~/.config/wal/templates && wal -R",
-            setup = function()
-                vim.g.wally_wal_dir = "~/.cache/wal"
-                vim.g.wally_italic_functions = true
-                vim.g.wally_italic_comments = true
-                vim.g.wally_italic_keywords = true
-                vim.g.wally_dark_sidebar = true
-                vim.g.wally_dark_float = true
-                vim.g.wally_transparent = true
-                vim.g.wally_transparent_sidebar = false
-                vim.g.wally_sidebars = {
-                    "qf",
-                    "vista_kind",
-                    "terminal",
-                    "NvimTree",
-                    "packer",
-                }
-            end,
-            config = [[require("wally").colorscheme()]]
-        })
+        -- use 'EdenEast/nightfox.nvim'
+        -- use 'navarasu/onedark.nvim'
+        -- use 'shaunsingh/nord.nvim'
+        -- use 'morhetz/gruvbox'
+        -- use 'marko-cerovac/material.nvim'
+        use "atalazer/wally.nvim"
 
         -- use 'code-biscuits/nvim-biscuits'
 --}}}
