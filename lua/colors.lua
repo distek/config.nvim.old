@@ -1,1 +1,1 @@
-/home/distek/.cache/wal/colors.lua
+/Users/jacob_fralick/.cache/wal/colors.lua

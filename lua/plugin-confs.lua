@@ -108,14 +108,12 @@ require("indent_blankline").setup {
 
 -- lightspeed.nvim {{{
 require'lightspeed'.setup {
-  jump_to_first_match = true,
   jump_on_partial_input_safety_timeout = 400,
   exit_after_idle_msecs = { labeled = 1500, unlabeled = 1000 },
   highlight_unique_chars = true,
   grey_out_search_area = true,
   match_only_the_start_of_same_char_seqs = true,
   limit_ft_matches = 4,
-  x_mode_prefix_key = '<c-x>',
   substitute_chars = { ['\r'] = '¬' },
   instant_repeat_fwd_key = nil,
   instant_repeat_bwd_key = nil,
@@ -461,7 +459,7 @@ require'nvim-tree'.setup {
     },
     auto_close          = true,
     open_on_tab         = false,
-    hijack_cursor       = true,
+    hijack_cursor       = false,
     update_cwd          = false,
     update_focused_file = {
         enable      = true,
@@ -498,6 +496,26 @@ if executable('rg')
 endif
 ]], false)
 --}}}
+
+-- specs.nvim {{{
+require('specs').setup{ 
+    show_jumps  = true,
+    min_jump = 10,
+    popup = {
+        delay_ms = 0, -- delay before popup displays
+        inc_ms = 30, -- time increments used for fade/resize effects 
+        blend = 0, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        width = 10,
+        winhl = "Warning",
+        fader = require('specs').pulse_fader,
+        resizer = require('specs').shrink_resizer
+    },
+    ignore_filetypes = {},
+    ignore_buftypes = {
+        nofile = true,
+    },
+}
+-- }}}
 
 -- startify {{{
 function StartifyHeader()

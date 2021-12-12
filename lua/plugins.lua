@@ -159,6 +159,8 @@ return require('packer').startup(function()
             end
         })
 
+        use 'edluffy/specs.nvim'
+
         use 'norcalli/nvim-colorizer.lua'
 
         use 'nvim-lua/plenary.nvim'

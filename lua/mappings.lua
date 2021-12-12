@@ -49,9 +49,6 @@ map('n', '<leader><',    ':BufferLineMovePrev<CR>')
 map("n", "<Tab>",        ':lua skipQFAndTerm("next")<cr>')
 map("n", "<S-Tab>",      ':lua skipQFAndTerm("prev")<cr>')
 
--- zoom
-map("n", "<leader>z",    '<cmd>lua zoom()<cr>')
-
 -- Window/buffer stuff
 map("n", "<leader>vs",   ":lua split('vsplit')<cr>")
 map("n", "<leader>ss",   ":lua split('split')<cr>")

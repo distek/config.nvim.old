@@ -1,6 +1,7 @@
 -- init.lua
 
 -- So lua lsp doesn't freak out
+vim = vim
 
 require("plugins")
 require("defaults")
@@ -10,4 +11,5 @@ require("language-confs")
 require("functions")
 require("mappings")
 require("theme")
+require("colormods")
 require("lualine-conf")
