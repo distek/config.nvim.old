@@ -18,6 +18,9 @@ end
 exmap('n', 'k',          "v:count == 0 ? 'gk' : 'k'")
 exmap('n', 'j',          "v:count == 0 ? 'gj' : 'j'")
 
+exmap('v', ">",          "'>gv'")
+exmap('v', "<",          "'<gv'")
+
 -- Page up/down (more comfortable than C-u/d)
 map("n", "<S-J>",        "<C-d>")
 map("n", "<S-K>",        "<C-u>")
@@ -143,13 +146,14 @@ map("n", "<leader>ud",   ":UndotreeToggle<CR>")
 map('n', '<leader>gy',   '<Cmd>lua vim.lsp.buf.declaration()<CR>')
 map('n', '<leader>gd',   '<Cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', '<leader>gD',   '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-map('n', '<leader>sd',   '<Cmd>lua vim.lsp.buf.hover()<CR>')
+map('n', '<leader>sd',   "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>")
+map('n', '<leader>pd',   "<cmd>lua require('lspsaga.provider').preview_definition()<CR>")
 map("n", "<leader>gr",   "<cmd>lua require('telescope.builtin').lsp_references()<cr>")
 map('n', '<leader>sD',   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})<CR>')
 map('n', '<leader>g[',   '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 map('n', '<leader>g]',   '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 
-map('n', '<leader>rn',   '<cmd>lua vim.lsp.buf.rename()<CR>')
+map('n', '<leader>rn',   "<cmd>lua require('lspsaga.rename').rename()<CR>")
 map('n', '<leader>ca',   '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 --}}}

@@ -97,8 +97,8 @@ return require('packer').startup(function()
             }
         -- Openscad (kinda)
             use 'sirtaj/vim-openscad'
-        -- -- markdown
-        --     use 'gabrielelana/vim-markdown'
+        -- markdown
+            use 'plasticboy/vim-markdown'
 --}}}
     -- LSP & Completion {{{
         -- use {'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile'}
@@ -127,6 +127,8 @@ return require('packer').startup(function()
 
         -- use 'mfussenegger/nvim-lint'
         use 'dense-analysis/ale'
+
+        use 'tami5/lspsaga.nvim'
 --}}}
     -- Misc{{{
         use 'powerman/vim-plugin-AnsiEsc'

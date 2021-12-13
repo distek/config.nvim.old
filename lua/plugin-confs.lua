@@ -125,6 +125,44 @@ require'lightspeed'.setup {
 }
 -- }}}
 
+-- lspsaga {{{
+require('lspsaga').init_lsp_saga{
+    use_saga_diagnostic_sign = true,
+    error_sign = '',
+    warn_sign = '',
+    hint_sign = '',
+    infor_sign = '',
+    code_action_icon = ' ',
+    code_action_prompt = {
+      enable = true,
+      sign = true,
+      sign_priority = 20,
+      virtual_text = true,
+    },
+
+    -- finder_definition_icon = '  ',
+    -- finder_reference_icon = '  ',
+    -- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+    -- finder_action_keys = {
+    --   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+    -- },
+    -- code_action_keys = {
+    --   quit = 'q',exec = '<CR>'
+    -- },
+    -- rename_action_keys = {
+    --   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+    -- },
+    -- definition_preview_icon = '  '
+    -- "single" "double" "round" "plus"
+    border_style = "double",
+    rename_prompt_prefix = '>',
+    -- if you don't use nvim-lspconfig you must pass your server name and
+    -- the related filetypes into this table
+    -- like server_filetype_map = {metals = {'sbt', 'scala'}}
+    -- server_filetype_map = {}
+}
+-- }}}
+
 -- lsp_signature {{{
 require "lsp_signature".setup({
     bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -503,12 +541,12 @@ require('specs').setup{
     min_jump = 10,
     popup = {
         delay_ms = 0, -- delay before popup displays
-        inc_ms = 30, -- time increments used for fade/resize effects 
-        blend = 0, -- starting blend, between 0-100 (fully transparent), see :h winblend
-        width = 10,
-        winhl = "Warning",
-        fader = require('specs').pulse_fader,
-        resizer = require('specs').shrink_resizer
+        inc_ms = 10, -- time increments used for fade/resize effects 
+        blend = 50, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        width = 30,
+        winhl = "TermCursor",
+        fader = require('specs').exp_fader,
+        resizer = require('specs').slide_resizer
     },
     ignore_filetypes = {},
     ignore_buftypes = {

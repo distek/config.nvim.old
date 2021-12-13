@@ -45,6 +45,8 @@ vim.o.syntax = "on"
 vim.wo.colorcolumn = "99999"
 vim.o.fillchars = "vert:│,fold:-,eob: "
 vim.o.pumblend = 15
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
 
 vim.cmd[[set sessionoptions-=blank]]
 
@@ -161,4 +163,10 @@ vim.cmd[[
     endfunction
     
     set foldtext=NeatFoldText()
+]]
+
+vim.cmd[[
+    augroup markdown
+        setlocal spell
+    augroup end
 ]]
