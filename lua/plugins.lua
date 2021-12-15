@@ -98,7 +98,10 @@ return require('packer').startup(function()
         -- Openscad (kinda)
             use 'sirtaj/vim-openscad'
         -- markdown
-            use 'plasticboy/vim-markdown'
+            use {'plasticboy/vim-markdown',
+                requires = 'godlygeek/tabular'
+            }
+
 --}}}
     -- LSP & Completion {{{
         -- use {'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile'}

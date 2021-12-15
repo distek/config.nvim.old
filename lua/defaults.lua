@@ -170,3 +170,8 @@ vim.cmd[[
         setlocal spell
     augroup end
 ]]
+
+-- Empty buffers are now markdown by default
+vim.cmd[[
+    autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
+]]

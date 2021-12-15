@@ -1,1 +1,1 @@
-/home/distek/git-clones/vide/videexplorer.lua
+../../git-clones/vide/videexplorer.lua
