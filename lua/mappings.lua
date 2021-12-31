@@ -114,14 +114,14 @@ map("n", "<leader>cm",   ':Commentary<cr><esc>')
 map("v", "<leader>cm",   ':Commentary<cr><esc>')
 
 -- nvim-tree
-map("n", "<A-1>",        ":NvimTreeToggle<CR>")
+map("n", "<leader>1",        ":NvimTreeToggle<CR>")
 
 -- Floaterm
-map("n", "<A-2>",        '<cmd>lua require("FTerm").toggle()<CR>')
-map("t", "<A-2>",        '<cmd>lua require("FTerm").toggle()<CR>')
+map("n", "<leader>2",        '<cmd>lua require("FTerm").toggle()<CR>')
+map("t", "<leader>2",        '<cmd>lua require("FTerm").toggle()<CR>')
 
 -- Tagbar
-map("n", "<A-4>",        ":call vista#sidebar#Toggle()<CR>")
+map("n", "<leader>4",        ":call vista#sidebar#Toggle()<CR>")
 
 -- Fugitive
 map("n", "<leader>Fi",  ":GFiles<CR>")

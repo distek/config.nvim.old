@@ -42,6 +42,8 @@ local function lighten(hex, amount, bg)
     return blend(hex, bg or utilfg, math.abs(amount))
 end
 
+local walPath = vim.fn.expand("~/.cache/wal")
+package.path = walPath.."/?.lua;" .. package.path
 
 local colors = require('colors')
 

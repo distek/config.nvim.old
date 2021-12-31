@@ -65,9 +65,33 @@ return require('packer').startup(function()
         -- use 'shaunsingh/nord.nvim'
         -- use 'morhetz/gruvbox'
         -- use 'marko-cerovac/material.nvim'
-        use "atalazer/wally.nvim"
+        use({
+           "atalazer/wally.nvim",
+           run = "./setup.sh",
+           opt = false,
+           config = function()
+               vim.g.wally_wal_dir = "~/.cache/wal"
 
-        -- use 'code-biscuits/nvim-biscuits'
+               vim.g.wally_italic_functions = true
+               vim.g.wally_italic_comments = true
+               vim.g.wally_italic_keywords = true
+               vim.g.wally_dark_sidebar = true
+               vim.g.wally_dark_float = true
+               vim.g.wally_transparent = false
+               vim.g.wally_transparent_sidebar = false
+               vim.g.wally_sidebars = {
+                   "qf",
+                   "vista_kind",
+                   "terminal",
+                   "NvimTree",
+                   "packer",
+               }
+
+               require("wally").colorscheme()
+
+               vim.cmd("colorscheme wally")
+           end,
+        })
 --}}}
     -- Languages & Filetypes{{{
         -- Ansible
@@ -129,7 +153,7 @@ return require('packer').startup(function()
         use 'windwp/nvim-autopairs'
 
         -- use 'mfussenegger/nvim-lint'
-        use 'dense-analysis/ale'
+        -- use 'dense-analysis/ale' -- nvim's lsp appears to have stepped up it's game
 
         use 'tami5/lspsaga.nvim'
 --}}}
