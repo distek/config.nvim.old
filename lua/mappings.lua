@@ -149,7 +149,7 @@ map('n', '<leader>gD',   '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 map('n', '<leader>sd',   "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>")
 map('n', '<leader>pd',   "<cmd>lua require('lspsaga.provider').preview_definition()<CR>")
 map("n", "<leader>gr",   "<cmd>lua require('telescope.builtin').lsp_references()<cr>")
-map('n', '<leader>sD',   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})<CR>')
+map('n', '<leader>sD',   '<cmd>lua vim.diagnostic.open_float()<CR>')
 map('n', '<leader>g[',   '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 map('n', '<leader>g]',   '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 
