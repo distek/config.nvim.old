@@ -47,6 +47,12 @@ return require('packer').startup(function()
         use 'mfussenegger/nvim-dap-python'
 
         use 'ggandor/lightspeed.nvim'
+        use {
+            "folke/zen-mode.nvim",
+            config = function()
+                require("zen-mode").setup {}
+            end
+        }
 --}}}
     -- Aesthetics{{{
         use 'nvim-lualine/lualine.nvim'

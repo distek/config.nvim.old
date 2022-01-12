@@ -15,8 +15,9 @@ require("bufferline").setup{
             {filetype = "NvimTree", text="Explorer", highlight = "Directory"},
             {filetype = "tagbar", text="TagBar", highlight = "Directory"},
         },
-        diagnostics = "lsp",
-        indicator_icon = "█"
+        diagnostics = "nvim_lsp",
+        indicator_icon = "█",
+        separator_style = "slant"
     },
 }
 --}}}
@@ -274,6 +275,8 @@ local feedkey = function(key, mode)
 end
 
 -- cmp.register_source('look', require('cmp_look').new())
+--
+
 cmp.setup({
     snippet = {
         expand = function(args)
