@@ -109,10 +109,8 @@ require("indent_blankline").setup {
 
 -- lightspeed.nvim {{{
 require'lightspeed'.setup {
-  jump_on_partial_input_safety_timeout = 400,
   exit_after_idle_msecs = { labeled = 1500, unlabeled = 1000 },
-  highlight_unique_chars = true,
-  grey_out_search_area = true,
+  jump_to_unique_chars = true,
   match_only_the_start_of_same_char_seqs = true,
   limit_ft_matches = 4,
   substitute_chars = { ['\r'] = '¬' },

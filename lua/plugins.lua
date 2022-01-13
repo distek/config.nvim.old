@@ -58,7 +58,7 @@ return require('packer').startup(function()
         use 'nvim-lualine/lualine.nvim'
         use {
             'akinsho/nvim-bufferline.lua',
-            requires = 'kyazdani42/nvim-web-devicons'
+            requires = 'kyazdani42/nvim-web-devicons',
         }
         use 'nvim-treesitter/nvim-treesitter'
         use 'nvim-treesitter/playground'
@@ -68,36 +68,10 @@ return require('packer').startup(function()
         -- Themes
         -- use 'EdenEast/nightfox.nvim'
         -- use 'navarasu/onedark.nvim'
-        -- use 'shaunsingh/nord.nvim'
+        use 'shaunsingh/nord.nvim'
         -- use 'morhetz/gruvbox'
         -- use 'marko-cerovac/material.nvim'
-        use({
-           "atalazer/wally.nvim",
-           run = "./setup.sh",
-           opt = false,
-           config = function()
-               vim.g.wally_wal_dir = "~/.cache/wal"
-
-               vim.g.wally_italic_functions = true
-               vim.g.wally_italic_comments = true
-               vim.g.wally_italic_keywords = true
-               vim.g.wally_dark_sidebar = true
-               vim.g.wally_dark_float = true
-               vim.g.wally_transparent = false
-               vim.g.wally_transparent_sidebar = false
-               vim.g.wally_sidebars = {
-                   "qf",
-                   "vista_kind",
-                   "terminal",
-                   "NvimTree",
-                   "packer",
-               }
-
-               require("wally").colorscheme()
-
-               vim.cmd("colorscheme wally")
-           end,
-        })
+        use "distek/wally.nvim"
 --}}}
     -- Languages & Filetypes{{{
         -- Ansible

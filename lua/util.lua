@@ -11,8 +11,6 @@ end
 
 -- Skips over quickfix buf when tabbing through buffers
 _G.skipQFAndTerm = function(dir)
-    local start_buffer = vim.api.nvim_buf_get_number("%")
-
     if dir == "prev" then
         vim.cmd[[BufferLineCyclePrev]]
     else
@@ -75,3 +73,36 @@ _G.dapStop = function()
     dapui.close()
 end
 
+local utilbg = "#000000"
+local utilfg = "#ffffff"
+
+local function hexToRgb(hex_str)
+    local hex = "[abcdef0-9][abcdef0-9]"
+    local pat = "^#(" .. hex .. ")(" .. hex .. ")(" .. hex .. ")$"
+    hex_str = string.lower(hex_str)
+
+    assert(string.find(hex_str, pat) ~= nil, "hex_to_rgb: invalid hex_str: " .. tostring(hex_str))
+
+    local r, g, b = string.match(hex_str, pat)
+    return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
+end
+
+local function blend(fg, bg, alpha)
+    bg = hexToRgb(bg)
+    fg = hexToRgb(fg)
+
+    local blendChannel = function(i)
+        local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
+        return math.floor(math.min(math.max(0, ret), 255) + 0.5)
+    end
+
+    return string.format("#%02X%02X%02X", blendChannel(1), blendChannel(2), blendChannel(3))
+end
+
+function Darken(hex, amount)
+    return blend(hex, utilbg, math.abs(amount))
+end
+
+function Lighten(hex, amount)
+    return blend(hex, utilfg, math.abs(amount))
+end
