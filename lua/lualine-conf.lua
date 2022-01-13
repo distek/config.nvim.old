@@ -85,11 +85,11 @@ local config = {
             -- We are going to use lualine_c an lualine_x as left and
             -- right section. Both are highlighted by c theme .    So we
             -- are just setting default looks o statusline
-        normal = {
-            a = { fg = colorOpts.fg, bg = colorOpts.bg, gui = 'bold' },
-            b = { fg = colorOpts.fg, bg = colorOpts.bg },
-            c = { fg = colorOpts.fg, bg = colorOpts.bg },
-        },
+            normal = {
+                a = { fg = colorOpts.fg, bg = colorOpts.bg, gui = 'bold' },
+                b = { fg = colorOpts.fg, bg = colorOpts.bg },
+                c = { fg = colorOpts.fg, bg = colorOpts.bg },
+            },
         },
         always_divide_middle = true,
     },

@@ -35,8 +35,8 @@ map("n", "n",            "nzzzv")
 map("n", "<leader>mk",   ":mksession!")
 
 -- Split Terminal
-map("n", "<leader>st",   ":lua split('split term://zsh')<CR>")
-map("n", "<leader>vt",   ":lua split('vsplit term://zsh')<CR>")
+map("n", "<leader>st",   ":lua split('split term://vimterm.sh')<CR>")
+map("n", "<leader>vt",   ":lua split('vsplit term://vimterm.sh')<CR>")
 
 -- Current window terminal
 map("n", "<leader>tt",   ":lua split('term')<CR>")

@@ -107,6 +107,36 @@ require("indent_blankline").setup {
 }
 --}}}
 
+-- jedi-vim {{{
+vim.cmd[[ let g:jedi#use_tabs_not_buffers = 0 ]]
+vim.cmd[[ let g:jedi#use_splits_not_buffers = 1 ]]
+vim.cmd[[ let g:jedi#auto_initialization = 1 ]]
+vim.cmd[[ let g:jedi#auto_vim_configuration = 1 ]]
+vim.cmd[[ let g:jedi#goto_command = "" ]]
+vim.cmd[[ let g:jedi#goto_assignments_command = "" ]]
+vim.cmd[[ let g:jedi#goto_definitions_command = "" ]]
+vim.cmd[[ let g:jedi#goto_stubs_command = "" ]]
+vim.cmd[[ let g:jedi#completions_command = "" ]]
+vim.cmd[[ let g:jedi#call_signatures_command = "" ]]
+vim.cmd[[ let g:jedi#usages_command = "" ]]
+vim.cmd[[ let g:jedi#rename_command = "" ]]
+vim.cmd[[ let g:jedi#completions_enabled = 1 ]]
+vim.cmd[[ let g:jedi#popup_on_dot = 0 ]]
+vim.cmd[[ let g:jedi#documentation_command = "" ]]
+vim.cmd[[ let g:jedi#show_call_signatures_delay = 500 ]]
+vim.cmd[[ let g:jedi#call_signature_escape = "?!?" ]]
+vim.cmd[[ let g:jedi#auto_close_doc = 1 ]]
+vim.cmd[[ let g:jedi#max_doc_height = 30 ]]
+vim.cmd[[ let g:jedi#popup_select_first = 1 ]]
+vim.cmd[[ let g:jedi#quickfix_window_height = 10 ]]
+vim.cmd[[ let g:jedi#force_py_version = "auto" ]]
+vim.cmd[[ let g:jedi#environment_path = "auto" ]]
+vim.cmd[[ let g:jedi#added_sys_path = "[]" ]]
+vim.cmd[[ let g:jedi#project_path = "auto" ]]
+vim.cmd[[ let g:jedi#smart_auto_mappings = 0 ]]
+vim.cmd[[ let g:jedi#use_tag_stack = 1 ]]
+-- }}}
+
 -- lightspeed.nvim {{{
 require'lightspeed'.setup {
   exit_after_idle_msecs = { labeled = 1500, unlabeled = 1000 },
