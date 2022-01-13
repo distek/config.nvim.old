@@ -4,8 +4,8 @@ package.path = walPath.."/?.lua;" .. package.path
 local colors = require("colors")
 
 vim.cmd("autocmd UIEnter * highlight! VertSplit guifg=" .. colors.foreground)
-vim.cmd("autocmd UIEnter * highlight! CursorLine guibg=" .. Darken(colors.background, 0.3))
-vim.cmd("autocmd UIEnter * highlight! Visual guibg=" .. colors.background)
+vim.cmd("autocmd UIEnter * highlight! CursorLine guibg=" .. Lighten(colors.background, 0.9))
+vim.cmd("autocmd UIEnter * highlight! Visual guibg=" .. Lighten(colors.background, 0.8))
 
 vim.cmd("highlight! NvimTreeNormal guibg=" .. Darken(colors.background, 0.5))
 
