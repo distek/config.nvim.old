@@ -73,6 +73,48 @@ _G.dapStop = function()
     dapui.close()
 end
 
+_G.nvimTreeToggle = function()
+    if vim.g.nvimtreeOpen == 0 then
+        vim.g.nvimtreeOpen = 1
+    else
+        vim.g.nvimtreeOpen = 0
+    end
+
+    vim.cmd[[NvimTreeToggle]]
+end
+
+_G.vistaToggle = function()
+    if vim.g.vistaOpen == 0 then
+        vim.g.vistaOpen = 1
+    else
+        vim.g.vistaOpen = 0
+    end
+
+    vim.cmd[[Vista!!]]
+end
+
+_G.toggleTerm = function()
+    if vim.g.nvimtreeOpen == 1 then
+        vim.cmd[[NvimTreeClose]]
+    end
+
+    if vim.g.vistaOpen == 1 then
+        vim.cmd[[Vista!]]
+    end
+
+    vim.cmd[[ToggleTerm]]
+
+    if vim.g.nvimtreeOpen == 1 then
+        vim.cmd[[NvimTreeOpen]]
+    end
+
+    if vim.g.vistaOpen == 1 then
+        vim.cmd[[Vista]]
+    end
+
+    vim.cmd[[silent wincmd p]]
+end
+
 local utilbg = "#000000"
 local utilfg = "#ffffff"
 
@@ -105,4 +147,8 @@ end
 
 function Lighten(hex, amount)
     return blend(hex, utilfg, math.abs(amount))
+end
+
+_G.getColor = function(group, attr)
+    return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
 end

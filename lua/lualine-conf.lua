@@ -9,23 +9,37 @@ local lualine = require 'lualine'
 -- stylua: ignore
 --
 
-local walPath = vim.fn.expand("~/.cache/wal")
-package.path = walPath.."/?.lua;" .. package.path
+local function read_file(path)
+    local file = io.open(path, "r") -- r read mode and b binary mode
+    if not file then return nil end
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return content
+end
 
-local colors = require('colors')
+local colorLines = read_file(vim.fn.expand("~/.colors"))
+
+local colors = {}
+
+local i = 0
+for c in string.gmatch(colorLines, "[^%s]+\n") do
+    colors[i] = string.gsub(c, "\n", "")
+    i = i + 1
+end
+
 
 local colorOpts = {
-    bg       = Darken(colors.color0, 0.70),
-    fg       = Lighten(colors.color8, 0.6),
-    yellow   = colors.color3,
-    cyan     = colors.color6,
-    darkblue = colors.color13,
-    green    = colors.color2,
-    orange   = colors.color12,
-    violet   = colors.color14,
-    magenta  = colors.color5,
-    blue     = colors.color4,
-    red      = colors.color1,
+    bg       = Darken(colors[0], 0.85),
+    fg       = Lighten(colors[8], 0.6),
+    yellow   = colors[3],
+    cyan     = colors[6],
+    darkblue = colors[13],
+    green    = colors[2],
+    orange   = colors[12],
+    violet   = colors[14],
+    magenta  = colors[5],
+    blue     = colors[4],
+    red      = colors[1],
 }
 
 local conditions = {

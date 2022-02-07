@@ -39,12 +39,11 @@ return require('packer').startup(function()
         }
         use 'mbbill/undotree'
         use "numtostr/FTerm.nvim"
+        use {"akinsho/toggleterm.nvim"}
 
         use 'mfussenegger/nvim-dap'
         use 'rcarriga/nvim-dap-ui'
         use 'theHamsta/nvim-dap-virtual-text'
-
-        use 'mfussenegger/nvim-dap-python'
 
         use 'ggandor/lightspeed.nvim'
         use {
@@ -53,6 +52,7 @@ return require('packer').startup(function()
                 require("zen-mode").setup {}
             end
         }
+        use 'gelguy/wilder.nvim'
 --}}}
     -- Aesthetics{{{
         use 'nvim-lualine/lualine.nvim'
@@ -65,13 +65,18 @@ return require('packer').startup(function()
 
         use 'p00f/nvim-ts-rainbow'
 
+        use {
+            "petertriho/nvim-scrollbar",
+            requires = 'kevinhwang91/nvim-hlslens',
+        }
+
         -- Themes
+        use 'shaunsingh/nord.nvim'
+        use 'ellisonleao/gruvbox.nvim'
+
         -- use 'EdenEast/nightfox.nvim'
         -- use 'navarasu/onedark.nvim'
-        use 'shaunsingh/nord.nvim'
-        -- use 'morhetz/gruvbox'
         -- use 'marko-cerovac/material.nvim'
-        use "distek/wally.nvim"
 --}}}
     -- Languages & Filetypes{{{
         -- Ansible
@@ -86,6 +91,7 @@ return require('packer').startup(function()
             use {
                 'davidhalter/jedi-vim',
                 'raimon49/requirements.txt.vim',
+                'mfussenegger/nvim-dap-python',
                 'psf/black',
                 ft = {'py', 'requirements'}
             }
@@ -102,9 +108,9 @@ return require('packer').startup(function()
         -- Openscad (kinda)
             use 'sirtaj/vim-openscad'
         -- markdown
-            use {'plasticboy/vim-markdown',
-                requires = 'godlygeek/tabular'
-            }
+            -- use {'plasticboy/vim-markdown',
+            --     requires = 'godlygeek/tabular'
+            -- }
 
 --}}}
     -- LSP & Completion {{{
@@ -151,6 +157,9 @@ return require('packer').startup(function()
 
         -- tmux stuff
         use 'christoomey/vim-tmux-navigator'
+
+        -- I literally only use the resize function from this
+        -- Should probably just pull it out and remove this
         use({
             "aserowy/tmux.nvim",
             config = function()
@@ -179,7 +188,6 @@ return require('packer').startup(function()
 
         use 'nvim-telescope/telescope.nvim'
 
-        use 'tpope/vim-fugitive'
         use 'tpope/vim-rhubarb'
         use 'tpope/vim-commentary'
 

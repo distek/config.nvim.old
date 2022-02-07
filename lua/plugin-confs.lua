@@ -12,8 +12,8 @@ require("bufferline").setup{
         show_tab_indicators = false,
         enforce_regular_tabs = false,
         offsets = {
-            {filetype = "NvimTree", text="Explorer", highlight = "Directory"},
-            {filetype = "tagbar", text="TagBar", highlight = "Directory"},
+            {filetype = "NvimTree", text="Explorer", highlight = "BufferLineFill"},
+            {filetype = "tagbar", text="TagBar", highlight = "BufferLineFill"},
         },
         diagnostics = "nvim_lsp",
         indicator_icon = "█",
@@ -204,50 +204,50 @@ require "lsp_signature".setup({
 -- }}}
 
 -- lspkind {{{
-require('lspkind').init({
-    -- enables text annotations
-    --
-    -- default: true
-    with_text = true,
-
-    -- default symbol map
-    -- can be either 'default' (requires nerd-fonts font) or
-    -- 'codicons' for codicon preset (requires vscode-codicons font)
-    --
-    -- default: 'default'
-    preset = 'codicons',
-
-    -- override preset symbols
-    --
-    -- default: {}
-    symbol_map = {
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "ﰠ",
-      Variable = "",
-      Class = "ﴯ",
-      Interface = "",
-      Module = "",
-      Property = "ﰠ",
-      Unit = "塞",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = "",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
-      Struct = "פּ",
-      Event = "",
-      Operator = "",
-      TypeParameter = ""
-    },
-})
+-- require('lspkind').init({
+--     -- enables text annotations
+--     --
+--     -- default: true
+--     with_text = true,
+--
+--     -- default symbol map
+--     -- can be either 'default' (requires nerd-fonts font) or
+--     -- 'codicons' for codicon preset (requires vscode-codicons font)
+--     --
+--     -- default: 'default'
+--     preset = 'codicons',
+--
+--     -- override preset symbols
+--     --
+--     -- default: {}
+--     symbol_map = {
+--       Text = "",
+--       Method = "",
+--       Function = "",
+--       Constructor = "",
+--       Field = "ﰠ",
+--       Variable = "",
+--       Class = "ﴯ",
+--       Interface = "",
+--       Module = "",
+--       Property = "ﰠ",
+--       Unit = "塞",
+--       Value = "",
+--       Enum = "",
+--       Keyword = "",
+--       Snippet = "",
+--       Color = "",
+--       File = "",
+--       Reference = "",
+--       Folder = "",
+--       EnumMember = "",
+--       Constant = "",
+--       Struct = "פּ",
+--       Event = "",
+--       Operator = "",
+--       TypeParameter = ""
+--     },
+-- })
 
 -- }}}
 
@@ -374,11 +374,24 @@ cmp.setup({
 -- nvim-dap {{{
 local dap = require('dap')
 
+-- dap.configurations.python = {
+--     {
+--         type = 'python';
+--         request = 'launch';
+--         name = "Launch file (Py2)";
+--         program = "${file}";
+--         pythonPath = function()
+--             return '/usr/bin/python'
+--         end;
+--     },
+-- }
+
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+
 dap.adapters.go = function(callback, config)
   local handle
-  local pid_or_err
   local port = 38697
-  handle, pid_or_err = vim.loop.spawn("dlv", {
+  handle, _ = vim.loop.spawn("dlv", {
     args = {"dap", "-l", "127.0.0.1:" .. port},
     detached = true
   }, function(code)
@@ -393,56 +406,40 @@ dap.adapters.go = function(callback, config)
 end
 
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-dap.configurations.go = {
-    {
-        type = "go",
-        name = "Debug",
-        request = "launch",
-        program = "${file}"
-    },
-    {
-        type = "go",
-        name = "Debug test",
-        request = "launch",
-        mode = "test", -- Mode is important
-        program = "${file}"
-    }
-}
-
 require("dapui").setup({
-  icons = { expanded = "▾", collapsed = "▸" },
-  mappings = {
-    -- Use a table to apply multiple mappings
-    expand = { "<CR>", "<2-LeftMouse>" },
-    open = "o",
-    remove = "d",
-    edit = "e",
-    repl = "r",
-  },
-  sidebar = {
-    -- You can change the order of elements in the sidebar
-    elements = {
-      -- Provide as ID strings or tables with "id" and "size" keys
-      { id = "scopes", size = 0.50, },
-      { id = "breakpoints", size = 0.25 },
-      { id = "watches", size = 0.25 },
-    },
-    size = 40,
-    position = "left", -- Can be "left", "right", "top", "bottom"
-  },
-  tray = {
-    elements = { "repl" },
-    size = 10,
-    position = "bottom", -- Can be "left", "right", "top", "bottom"
-  },
-  floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil, -- Floats will be treated as percentage of your screen.
+    icons = { expanded = "▾", collapsed = "▸" },
     mappings = {
-      close = { "q", "<Esc>" },
+        -- Use a table to apply multiple mappings
+        expand = { "<CR>", "<2-LeftMouse>" },
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
     },
-  },
-  windows = { indent = 1 },
+    sidebar = {
+        -- You can change the order of elements in the sidebar
+        elements = {
+            -- Provide as ID strings or tables with "id" and "size" keys
+            { id = "scopes", size = 0.50, },
+            { id = "breakpoints", size = 0.25 },
+            { id = "watches", size = 0.25 },
+        },
+        size = 40,
+        position = "left", -- Can be "left", "right", "top", "bottom"
+    },
+    tray = {
+        elements = { "repl" },
+        size = 10,
+        position = "bottom", -- Can be "left", "right", "top", "bottom"
+    },
+    floating = {
+        max_height = nil, -- These can be integers or a float between 0 and 1.
+        max_width = nil, -- Floats will be treated as percentage of your screen.
+        mappings = {
+            close = { "q", "<Esc>" },
+        },
+    },
+    windows = { indent = 1 },
 })
 
 dap.adapters.dlv_spawn = function(cb)
@@ -481,14 +478,43 @@ dap.adapters.dlv_spawn = function(cb)
 end
 
 dap.configurations.go = {
-  {
-    type = 'dlv_spawn',
-    name = 'Launch dlv & file',
-    request = 'launch',
-    program = "${workspaceFolder}";
-  },
+    {
+        type = 'dlv_spawn',
+        name = 'Launch dlv & file',
+        request = 'launch',
+        program = "${workspaceFolder}";
+    },
+    {
+        type = "go",
+        name = "Debug",
+        request = "launch",
+        program = "${file}"
+    },
+    {
+        type = "dlv_spawn",
+        name = "Debug with arguments",
+        request = "launch",
+        program = "${file}",
+        args = function()
+            local args_string = vim.fn.input('Arguments: ')
+            return vim.split(args_string, " +")
+        end,
+
+    },
+    {
+        type = "go",
+        name = "Debug test",
+        request = "launch",
+        mode = "test", -- Mode is important
+        program = "${file}"
+    }
 }
 
+dap.defaults.fallback.force_external_terminal = true
+dap.defaults.fallback.external_terminal = {
+    command = '/usr/local/bin/alacritty';
+    args = {'-e'};
+}
 require('nvim-dap-virtual-text').setup()
 -- }}}
 
@@ -514,6 +540,49 @@ require("notify").setup({
   },
 })
 --}}}
+
+-- nvim-scrollbar {{{
+local themeColors = require("gruvbox.colors")
+require("scrollbar").setup({
+    show = true,
+    handle = {
+        text = " ",
+        color = themeColors.dark4,
+        hide_if_all_visible = true, -- Hides handle if all lines are visible
+    },
+    marks = {
+        Search = { text = { "-", "=" }, priority = 0, color = themeColors.bright_orange },
+        Error = { text = { "-", "=" }, priority = 1, color = themeColors.bright_red },
+        Warn = { text = { "-", "=" }, priority = 2, color =  themeColors.bright_yellow },
+        Info = { text = { "-", "=" }, priority = 3, color =  themeColors.bright_blue },
+        Hint = { text = { "-", "=" }, priority = 4, color =  themeColors.bright_green },
+        Misc = { text = { "-", "=" }, priority = 5, color =  themeColors.bright_purple },
+    },
+    excluded_filetypes = {
+        "prompt",
+        "TelescopePrompt",
+    },
+    excluded_buftypes = {
+        "terminal"
+    },
+    autocmd = {
+        render = {
+            "BufWinEnter",
+            "TabEnter",
+            "TermEnter",
+            "WinEnter",
+            "CmdwinLeave",
+            "TextChanged",
+            "VimResized",
+            "WinScrolled",
+        },
+    },
+    handlers = {
+        diagnostic = true,
+        search = true, -- Requires hlslens to be loaded
+    },
+})
+-- }}}
 
 -- nvim-tree{{{
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -658,10 +727,45 @@ vim.g.startify_lists = {
 
 --}}}
 
+-- toggleterm {{{
+require("toggleterm").setup{
+  -- size can be a number or function which is passed the current terminal
+  -- open_mapping = [[<leader>2]],
+  -- on_open = fun(t: Terminal), -- function to run when the terminal opens
+  -- on_close = fun(t: Terminal), -- function to run when the terminal closes
+  hide_numbers = true, -- hide the number column in toggleterm buffers
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = '1', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+  start_in_insert = true,
+  -- insert_mappings = false, -- whether or not the open mapping applies in insert mode
+  terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+  persist_size = true,
+  direction = 'horizontal',
+  close_on_exit = true, -- close the terminal window when the process exits
+  shell = vim.o.shell, -- change the default shell
+  -- This field is only relevant if direction is set to 'float'
+  float_opts = {
+    -- The border key is *almost* the same as 'nvim_open_win'
+    -- see :h nvim_open_win for details on borders however
+    -- the 'curved' border is a custom border type
+    -- not natively supported but implemented in this plugin.
+    border = 'single', -- | 'double' | 'shadow' | 'curved' | ... other options supported by win open
+    -- width = <value>,
+    height = 15,
+    winblend = 3,
+    highlights = {
+      border = "Normal",
+      background = "Normal",
+    }
+  }
+}
+-- }}}
+
 -- Treesitter{{{
 require'nvim-treesitter.configs'.setup {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ignore_install = {'haskell'}, -- List of parsers to ignore installing
+    ignore_install = {'haskell', 'phpdoc'}, -- List of parsers to ignore installing
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,

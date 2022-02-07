@@ -6,7 +6,7 @@ vim.g.maplocalleader = " "
 
 vim.o.mouse = "a"
 vim.o.autoread = true
-vim.o.wrap = true
+vim.o.wrap = false
 vim.o.showtabline = 2
 vim.o.foldmethod = "marker"
 vim.o.updatetime = 250
@@ -18,7 +18,7 @@ vim.o.softtabstop = 0
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.hidden = true
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 vim.o.incsearch = true
 vim.o.smartcase = true
 vim.o.ignorecase = true
@@ -35,18 +35,19 @@ vim.o.showbreak="↪ "
 vim.o.relativenumber = true
 vim.o.cursorline = true
 vim.o.linebreak = true
-vim.o.termguicolors = false
+vim.o.termguicolors = true
 vim.o.breakindent = true
 vim.o.timeoutlen = 250
 vim.o.wildignore = "*.o,*.obj,.git,*.rbc,*.pyc,__pycache__"
 vim.o.wildmode = "list:longest,list:full"
 vim.o.clipboard = "unnamedplus"
 vim.o.syntax = "on"
-vim.wo.colorcolumn = "99999"
+vim.wo.colorcolumn = "80"
 vim.o.fillchars = "vert:│,fold:-,eob: "
 vim.o.pumblend = 15
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = { 'en_us' }
+vim.o.nuw = 5
 
 vim.cmd[[set sessionoptions-=blank]]
 
@@ -77,12 +78,19 @@ vim.cmd[[
 ]]
 
 -- Neovide
-vim.cmd[[set guifont=PerfectDOSVGA437\ Nerd\ Font:w2]]
+vim.cmd[[set guifont=FiraCode\ Nerd\ Font\ Mono:h16]]
 vim.cmd[[set guicursor+=a:blinkon650]]
 
 -- netrw Sexplore or Lexplore
 vim.cmd[[let g:netrw_winsize = 20]]
+
 --}}}
+
+-- User globals {{{
+vim.g.nvimtreeOpen = 0
+
+vim.g.vistaOpen = 0
+-- }}}
 
 -- Disabled builtins {{{
 -- Improves startup time just ever so slightly
@@ -172,6 +180,6 @@ vim.cmd[[
 ]]
 
 -- Empty buffers are now markdown by default
-vim.cmd[[
-    autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
-]]
+-- vim.cmd[[
+--     autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
+-- ]]
