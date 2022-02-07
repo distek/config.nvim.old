@@ -28,7 +28,6 @@ require("packer").config = {
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     -- Modes{{{
-        use 'simeji/winresizer'
         use 'sindrets/winshift.nvim'
         use 'fidian/hexmode'
         use 'liuchengxu/vista.vim'
@@ -39,7 +38,7 @@ return require('packer').startup(function()
         }
         use 'mbbill/undotree'
         use "numtostr/FTerm.nvim"
-        use {"akinsho/toggleterm.nvim"}
+        use "akinsho/toggleterm.nvim"
 
         use 'mfussenegger/nvim-dap'
         use 'rcarriga/nvim-dap-ui'
@@ -52,7 +51,6 @@ return require('packer').startup(function()
                 require("zen-mode").setup {}
             end
         }
-        use 'gelguy/wilder.nvim'
 --}}}
     -- Aesthetics{{{
         use 'nvim-lualine/lualine.nvim'
@@ -88,13 +86,13 @@ return require('packer').startup(function()
         -- CSV
             use 'chrisbra/csv.vim'
         -- Python
-            use {
-                'davidhalter/jedi-vim',
-                'raimon49/requirements.txt.vim',
-                'mfussenegger/nvim-dap-python',
-                'psf/black',
-                ft = {'py', 'requirements'}
-            }
+
+            use 'davidhalter/jedi-vim'
+            use 'raimon49/requirements.txt.vim'
+            use 'mfussenegger/nvim-dap-python'
+            use 'psf/black'
+
+
         -- Go
             use {
             --     -- 'fatih/vim-go',
