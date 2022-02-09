@@ -74,45 +74,42 @@ _G.dapStop = function()
 end
 
 _G.nvimTreeToggle = function()
-    if vim.g.nvimtreeOpen == 0 then
-        vim.g.nvimtreeOpen = 1
-    else
-        vim.g.nvimtreeOpen = 0
-    end
+    vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
 
     vim.cmd[[NvimTreeToggle]]
 end
 
 _G.vistaToggle = function()
-    if vim.g.vistaOpen == 0 then
-        vim.g.vistaOpen = 1
-    else
-        vim.g.vistaOpen = 0
-    end
+    vim.g.vistaOpen = not vim.g.vistaOpen
 
     vim.cmd[[Vista!!]]
 end
 
 _G.toggleTerm = function()
-    if vim.g.nvimtreeOpen == 1 then
+    local doWinCmd = false
+    if vim.g.nvimtreeOpen then
         vim.cmd[[NvimTreeClose]]
     end
 
-    if vim.g.vistaOpen == 1 then
+    if vim.g.vistaOpen then
         vim.cmd[[Vista!]]
     end
 
     vim.cmd[[ToggleTerm]]
 
-    if vim.g.nvimtreeOpen == 1 then
+    if vim.g.nvimtreeOpen then
+        doWinCmd = true
         vim.cmd[[NvimTreeOpen]]
     end
 
-    if vim.g.vistaOpen == 1 then
+    if vim.g.vistaOpen then
+        doWinCmd = true
         vim.cmd[[Vista]]
     end
 
-    vim.cmd[[silent wincmd p]]
+    if doWinCmd then
+        vim.cmd[[silent wincmd p]]
+    end
 end
 
 local utilbg = "#000000"

@@ -1,14 +1,15 @@
 -- Defaults
-
--- Sets{{{
+--
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Sets{{{
 vim.o.mouse = "a"
 vim.o.autoread = true
 vim.o.wrap = false
 vim.o.showtabline = 2
 vim.o.foldmethod = "marker"
+vim.o.showbreak="↪ "
 vim.o.updatetime = 250
 vim.o.cmdheight = 1
 vim.o.encoding = "utf-8"
@@ -26,14 +27,15 @@ vim.o.inccommand = "nosplit"
 vim.o.fileformats="unix,dos,mac"
 vim.o.ruler = true
 vim.o.number = true
+vim.o.relativenumber = true
+vim.o.numberwidth = 5
+vim.o.signcolumn = "yes:2"
+vim.o.cursorline = true
 vim.o.scrolloff=2
 vim.o.laststatus=2
 vim.o.modeline = true
 vim.o.modelines = 5
 vim.o.showmode = false
-vim.o.showbreak="↪ "
-vim.o.relativenumber = true
-vim.o.cursorline = true
 vim.o.linebreak = true
 vim.o.termguicolors = true
 vim.o.breakindent = true
@@ -47,7 +49,6 @@ vim.o.fillchars = "vert:│,fold:-,eob: "
 vim.o.pumblend = 15
 vim.opt.spell = false
 vim.opt.spelllang = { 'en_us' }
-vim.o.nuw = 5
 
 vim.cmd[[set sessionoptions-=blank]]
 
@@ -87,9 +88,9 @@ vim.cmd[[let g:netrw_winsize = 20]]
 --}}}
 
 -- User globals {{{
-vim.g.nvimtreeOpen = 0
+vim.g.nvimtreeOpen = false
 
-vim.g.vistaOpen = 0
+vim.g.vistaOpen = false
 -- }}}
 
 -- Disabled builtins {{{

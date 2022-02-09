@@ -63,18 +63,17 @@ return require('packer').startup(function()
 
         use 'p00f/nvim-ts-rainbow'
 
-        use {
-            "petertriho/nvim-scrollbar",
-            requires = 'kevinhwang91/nvim-hlslens',
-        }
+        use 'kevinhwang91/nvim-hlslens'
+        use "petertriho/nvim-scrollbar"
 
         -- Themes
-        use 'shaunsingh/nord.nvim'
         use 'ellisonleao/gruvbox.nvim'
 
-        -- use 'EdenEast/nightfox.nvim'
-        -- use 'navarasu/onedark.nvim'
-        -- use 'marko-cerovac/material.nvim'
+        use 'EdenEast/nightfox.nvim'
+
+        use 'navarasu/onedark.nvim'
+
+        use 'marko-cerovac/material.nvim'
 --}}}
     -- Languages & Filetypes{{{
         -- Ansible
@@ -86,16 +85,13 @@ return require('packer').startup(function()
         -- CSV
             use 'chrisbra/csv.vim'
         -- Python
-
             use 'davidhalter/jedi-vim'
             use 'raimon49/requirements.txt.vim'
             use 'mfussenegger/nvim-dap-python'
             use 'psf/black'
-
-
         -- Go
             use {
-            --     -- 'fatih/vim-go',
+                -- 'fatih/vim-go',
                 'ray-x/go.nvim'
             }
         -- Rust
