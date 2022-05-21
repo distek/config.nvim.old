@@ -17,6 +17,7 @@ vim.api.nvim_exec([[
 local use = require('packer').use
 
 require("packer").config = {
+    max_jobs = 1,
     profile = {
         enable = true,
         threshold = 1
@@ -30,27 +31,96 @@ return require('packer').startup(function()
     -- Modes{{{
         use 'sindrets/winshift.nvim'
         use 'fidian/hexmode'
-        use 'liuchengxu/vista.vim'
-        use 'junegunn/limelight.vim'
+        -- use 'liuchengxu/vista.vim'
+        -- use 'junegunn/limelight.vim'
         use {
             'kyazdani42/nvim-tree.lua',
             requires = 'kyazdani42/nvim-web-devicons'
         }
-        use 'mbbill/undotree'
-        use "numtostr/FTerm.nvim"
-        use "akinsho/toggleterm.nvim"
+        use {
+            'mbbill/undotree',
+            opt = true
+        }
+        use {
+            "numtostr/FTerm.nvim",
+            opt = true,
+            config = function ()
+                require'FTerm'.setup({
+                    border = 'single',
+                    dimensions  = {
+                        height = 0.5,
+                        width = 0.5,
+                        x = 0.9,
+                        y = 0.1
+                    },
+                })
+
+                local fterm = require("FTerm")
+
+                local lazygit = fterm:new({
+                    cmd = "lazygit",
+                    dimensions = {
+                        height = 0.9,
+                        width = 0.9
+                    }
+                })
+
+                function _G.__fterm_gitui()
+                    lazygit.toggle()
+                end
+            end
+        }
+        use {
+            "akinsho/toggleterm.nvim",
+            opt = false,
+            config = function()
+                require("toggleterm").setup{
+                    -- size can be a number or function which is passed the current terminal
+                    -- on_open = fun(t: Terminal), -- function to run when the terminal opens
+                    -- on_close = fun(t: Terminal), -- function to run when the terminal closes
+                    hide_numbers = true, -- hide the number column in toggleterm buffers
+                    shade_filetypes = {},
+                    shade_terminals = true,
+                    shading_factor = '0.8', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+                    start_in_insert = true,
+                    -- insert_mappings = false, -- whether or not the open mapping applies in insert mode
+                    terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+                    persist_size = true,
+                    direction = 'horizontal',
+                    close_on_exit = true, -- close the terminal window when the process exits
+                    shell = vim.o.shell, -- change the default shell
+                    -- This field is only relevant if direction is set to 'float'
+                    float_opts = {
+                        -- The border key is *almost* the same as 'nvim_open_win'
+                        -- see :h nvim_open_win for details on borders however
+                        -- the 'curved' border is a custom border type
+                        -- not natively supported but implemented in this plugin.
+                        border = 'single', -- | 'double' | 'shadow' | 'curved' | ... other options supported by win open
+                        -- width = <value>,
+                        height = 15,
+                        winblend = 3,
+                        highlights = {
+                            border = "Normal",
+                            background = "Normal",
+                      }
+                    }
+                }
+            end
+
+        }
 
         use 'mfussenegger/nvim-dap'
         use 'rcarriga/nvim-dap-ui'
         use 'theHamsta/nvim-dap-virtual-text'
 
         use 'ggandor/lightspeed.nvim'
-        use {
-            "folke/zen-mode.nvim",
-            config = function()
-                require("zen-mode").setup {}
-            end
-        }
+        -- use {
+        --     "folke/zen-mode.nvim",
+        --     config = function()
+        --         require("zen-mode").setup {}
+        --     end
+        -- }
+        use 'vimwiki/vimwiki'
 --}}}
     -- Aesthetics{{{
         use 'nvim-lualine/lualine.nvim'
@@ -59,56 +129,90 @@ return require('packer').startup(function()
             requires = 'kyazdani42/nvim-web-devicons',
         }
         use 'nvim-treesitter/nvim-treesitter'
-        use 'nvim-treesitter/playground'
+        -- use 'nvim-treesitter/playground'
 
         use 'p00f/nvim-ts-rainbow'
 
         use 'kevinhwang91/nvim-hlslens'
-        use "petertriho/nvim-scrollbar"
+        -- use "petertriho/nvim-scrollbar"
 
         -- Themes
         use 'ellisonleao/gruvbox.nvim'
-
-        use 'EdenEast/nightfox.nvim'
-
-        use 'navarasu/onedark.nvim'
-
-        use 'marko-cerovac/material.nvim'
+        use "rebelot/kanagawa.nvim"
 --}}}
     -- Languages & Filetypes{{{
+        -- Reduces startup-time by about 50ms
+            use "nathom/filetype.nvim"
         -- Ansible
-            use 'pearofducks/ansible-vim'
+            use {
+                'pearofducks/ansible-vim',
+                opt = true,
+                ft = {'ansible'}
+            }
         -- GPG
             use 'jamessan/vim-gnupg'
         -- C
-            use 'rhysd/vim-clang-format'
+            use {
+                'rhysd/vim-clang-format',
+                opt = true,
+                ft = {'c', 'cpp'}
+            }
         -- CSV
-            use 'chrisbra/csv.vim'
+            use {
+                'chrisbra/csv.vim',
+                opt = true,
+                ft = {'csv'}
+            }
         -- Python
-            use 'davidhalter/jedi-vim'
-            use 'raimon49/requirements.txt.vim'
-            use 'mfussenegger/nvim-dap-python'
-            use 'psf/black'
+            use {
+                'davidhalter/jedi-vim',
+                opt = true,
+                ft = {'python'}
+            }
+            use {
+                'raimon49/requirements.txt.vim',
+                opt = true,
+                ft = {'txt'}
+            }
+            use {
+                'mfussenegger/nvim-dap-python',
+                opt = true,
+                ft = {'python'}
+            }
+            use {
+                'psf/black',
+                opt = true,
+                ft = {'python'}
+            }
         -- Go
             use {
                 -- 'fatih/vim-go',
-                'ray-x/go.nvim'
+                'ray-x/go.nvim',
+                opt = true,
+                ft = {'go', 'gomod'}
             }
         -- Rust
             use {
                 'rust-lang/rust.vim',
+                opt = true,
                 ft = {'rust'}
             }
         -- Openscad (kinda)
-            use 'sirtaj/vim-openscad'
+            use {
+                'sirtaj/vim-openscad',
+                opt = true,
+                ft = {'openscad'}
+            }
         -- markdown
-            -- use {'plasticboy/vim-markdown',
-            --     requires = 'godlygeek/tabular'
-            -- }
+            use {
+                'plasticboy/vim-markdown',
+                requires = 'godlygeek/tabular',
+                opt = true,
+                ft = {'markdown'}
+            }
 
 --}}}
     -- LSP & Completion {{{
-        -- use {'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile'}
         use 'neovim/nvim-lspconfig'
         use 'williamboman/nvim-lsp-installer'
 
@@ -132,18 +236,17 @@ return require('packer').startup(function()
 
         use 'windwp/nvim-autopairs'
 
-        -- use 'mfussenegger/nvim-lint'
-        -- use 'dense-analysis/ale' -- nvim's lsp appears to have stepped up it's game
-
         use 'tami5/lspsaga.nvim'
 --}}}
     -- Misc{{{
-        use 'powerman/vim-plugin-AnsiEsc'
+        use {
+            'powerman/vim-plugin-AnsiEsc',
+        }
 
         use 'tpope/vim-obsession'
 
         -- use 'windwp/nvim-autopairs'
-        use 'rcarriga/nvim-notify'
+        -- use 'rcarriga/nvim-notify'
 
         use 'folke/which-key.nvim'
 
@@ -177,15 +280,20 @@ return require('packer').startup(function()
 
         use 'nvim-lua/plenary.nvim'
 
-        use 'junegunn/fzf'
-        use 'junegunn/fzf.vim'
+        use {
+            'junegunn/fzf',
+            opt=true
+        }
+        use {
+            'junegunn/fzf.vim',
+            opt=true
+        }
 
         use 'nvim-telescope/telescope.nvim'
 
-        use 'tpope/vim-rhubarb'
         use 'tpope/vim-commentary'
 
-        use 'mhinz/vim-startify'
+        -- use 'mhinz/vim-startify'
 
         use "lukas-reineke/indent-blankline.nvim"
 

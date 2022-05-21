@@ -26,32 +26,6 @@ require("bufferline").setup{
 
 --}}}
 
--- FTerm (floating terminal){{{
-require'FTerm'.setup({
-    border = 'single',
-    dimensions  = {
-        height = 0.5,
-        width = 0.5,
-        x = 0.9,
-        y = 0.1
-    },
-})
-
-local fterm = require("FTerm")
-
-local lazygit = fterm:new({
-    cmd = "lazygit",
-    dimensions = {
-        height = 0.9,
-        width = 0.9
-    }
-})
-
-function _G.__fterm_gitui()
-    lazygit:toggle()
-end
--- }}}
-
 -- gitsigns {{{
 require('gitsigns').setup ()
 -- }}}
@@ -164,7 +138,7 @@ require('lspsaga').init_lsp_saga{
     code_action_icon = ' ',
     code_action_prompt = {
       enable = true,
-      sign = true,
+      sign = false,
       sign_priority = 20,
       virtual_text = true,
     },
@@ -374,8 +348,6 @@ cmp.setup({
 -- nvim-dap {{{
 local dap = require('dap')
 
-require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-
 dap.adapters.go = function(callback, config)
   local handle
   local port = 38697
@@ -500,76 +472,76 @@ dap.configurations.go = {
 
 dap.defaults.fallback.force_external_terminal = true
 dap.defaults.fallback.external_terminal = {
-    command = '/usr/local/bin/alacritty';
+    command = '/Applications/Alacritty.app/Contents/MacOS/alacritty';
     args = {'-e'};
 }
 require('nvim-dap-virtual-text').setup()
 -- }}}
 
 -- nvim-notify{{{
-vim.notify = require("notify")
-require("notify").setup({
-  -- Animation style (see below for details)
-  stages = "slide",
+-- vim.notify = require("notify")
+-- require("notify").setup({
+--   -- Animation style (see below for details)
+--   stages = "slide",
 
-  -- Default timeout for notifications
-  timeout = 5000,
+--   -- Default timeout for notifications
+--   timeout = 5000,
 
-  -- For stages that change opacity this is treated as the highlight behind the window
-  -- background_colour = "Comment",
+--   -- For stages that change opacity this is treated as the highlight behind the window
+--   -- background_colour = "Comment",
 
-  -- Icons for the different levels
-  icons = {
-    ERROR = "",
-    WARN = "",
-    INFO = "",
-    DEBUG = "",
-    TRACE = "✎",
-  },
-})
+--   -- Icons for the different levels
+--   icons = {
+--     ERROR = "",
+--     WARN = "",
+--     INFO = "",
+--     DEBUG = "",
+--     TRACE = "✎",
+--   },
+-- })
 --}}}
 
 -- nvim-scrollbar {{{
-local themeColors = require("gruvbox.colors")
-require("scrollbar").setup({
-    show = true,
-    handle = {
-        text = " ",
-        color = themeColors.dark4,
-        hide_if_all_visible = true, -- Hides handle if all lines are visible
-    },
-    marks = {
-        Search = { text = { "-", "=" }, priority = 0, color = themeColors.bright_orange },
-        Error = { text = { "-", "=" }, priority = 1, color = themeColors.bright_red },
-        Warn = { text = { "-", "=" }, priority = 2, color =  themeColors.bright_yellow },
-        Info = { text = { "-", "=" }, priority = 3, color =  themeColors.bright_blue },
-        Hint = { text = { "-", "=" }, priority = 4, color =  themeColors.bright_green },
-        Misc = { text = { "-", "=" }, priority = 5, color =  themeColors.bright_purple },
-    },
-    excluded_filetypes = {
-        "prompt",
-        "TelescopePrompt",
-    },
-    excluded_buftypes = {
-        "terminal"
-    },
-    autocmd = {
-        render = {
-            "BufWinEnter",
-            "TabEnter",
-            "TermEnter",
-            "WinEnter",
-            "CmdwinLeave",
-            "TextChanged",
-            "VimResized",
-            "WinScrolled",
-        },
-    },
-    handlers = {
-        diagnostic = true,
-        search = true, -- Requires hlslens to be loaded
-    },
-})
+-- local themeColors = require("gruvbox.colors")
+-- require("scrollbar").setup({
+--     show = true,
+--     handle = {
+--         text = " ",
+--         color = themeColors.dark4,
+--         hide_if_all_visible = true, -- Hides handle if all lines are visible
+--     },
+--     marks = {
+--         Search = { text = { "-", "=" }, priority = 0, color = themeColors.bright_orange },
+--         Error = { text = { "-", "=" }, priority = 1, color = themeColors.bright_red },
+--         Warn = { text = { "-", "=" }, priority = 2, color =  themeColors.bright_yellow },
+--         Info = { text = { "-", "=" }, priority = 3, color =  themeColors.bright_blue },
+--         Hint = { text = { "-", "=" }, priority = 4, color =  themeColors.bright_green },
+--         Misc = { text = { "-", "=" }, priority = 5, color =  themeColors.bright_purple },
+--     },
+--     excluded_filetypes = {
+--         "prompt",
+--         "TelescopePrompt",
+--     },
+--     excluded_buftypes = {
+--         "terminal"
+--     },
+--     autocmd = {
+--         render = {
+--             "BufWinEnter",
+--             "TabEnter",
+--             "TermEnter",
+--             "WinEnter",
+--             "CmdwinLeave",
+--             "TextChanged",
+--             "VimResized",
+--             "WinScrolled",
+--         },
+--     },
+--     handlers = {
+--         diagnostic = true,
+--         search = true, -- Requires hlslens to be loaded
+--     },
+-- })
 -- }}}
 
 -- nvim-tree{{{
@@ -584,7 +556,6 @@ require'nvim-tree'.setup {
         enable = true,
         auto_open = true,
     },
-    auto_close          = true,
     open_on_tab         = false,
     hijack_cursor       = false,
     update_cwd          = false,
@@ -600,7 +571,6 @@ require'nvim-tree'.setup {
     view = {
         width = 30,
         side = 'left',
-        auto_resize = false,
         mappings = {
             custom_only = false,
             list = {
@@ -608,6 +578,11 @@ require'nvim-tree'.setup {
             }
         }
     },
+    actions = {
+        open_file = {
+            resize_window = false,
+        }
+    }
 }
 
 --}}}
@@ -644,110 +619,80 @@ require('specs').setup{
 }
 -- }}}
 
--- startify {{{
-function StartifyHeader()
-  local v = vim.version()
-  v = v.major .. '.' .. v.minor .. '.' .. v.patch
-  -- https://patorjk.com/software/taag/#p=display&h=0&v=0&f=Bloody&t=NVIM%0A
-  return {
-    '',
-    '',
-    ' ███▄    █  ██▒   █▓ ██▓ ███▄ ▄███▓',
-    ' ██ ▀█   █ ▓██░   █▒▓██▒▓██▒▀█▀ ██▒',
-    '▓██  ▀█ ██▒ ▓██  █▒░▒██▒▓██    ▓██░',
-    '▓██▒  ▐▌██▒  ▒██ █░░░██░▒██    ▒██ ',
-    '▒██░   ▓██░   ▒▀█░  ░██░▒██▒   ░██▒',
-    '░ ▒░   ▒ ▒    ░ ▐░  ░▓  ░ ▒░   ░  ░',
-    '░ ░░   ░ ▒░   ░ ░░   ▒ ░░  ░      ░',
-    '   ░   ░ ░      ░░   ▒ ░░      ░   ',
-    '         ░       ░   ░         ░   ',
-    '  ░             ░                  ',
-    '       ░                           ',
-    '                             ░     ',
-    '',
-    '            Neovim v' .. v .. '',
-    '',
-  }
-end
+---- startify {{{
+--function StartifyHeader()
+--  local v = vim.version()
+--  v = v.major .. '.' .. v.minor .. '.' .. v.patch
+--  -- https://patorjk.com/software/taag/#p=display&h=0&v=0&f=Bloody&t=NVIM%0A
+--  return {
+--    '',
+--    '',
+--    ' ███▄    █  ██▒   █▓ ██▓ ███▄ ▄███▓',
+--    ' ██ ▀█   █ ▓██░   █▒▓██▒▓██▒▀█▀ ██▒',
+--    '▓██  ▀█ ██▒ ▓██  █▒░▒██▒▓██    ▓██░',
+--    '▓██▒  ▐▌██▒  ▒██ █░░░██░▒██    ▒██ ',
+--    '▒██░   ▓██░   ▒▀█░  ░██░▒██▒   ░██▒',
+--    '░ ▒░   ▒ ▒    ░ ▐░  ░▓  ░ ▒░   ░  ░',
+--    '░ ░░   ░ ▒░   ░ ░░   ▒ ░░  ░      ░',
+--    '   ░   ░ ░      ░░   ▒ ░░      ░   ',
+--    '         ░       ░   ░         ░   ',
+--    '  ░             ░                  ',
+--    '       ░                           ',
+--    '                             ░     ',
+--    '',
+--    '            Neovim v' .. v .. '',
+--    '',
+--  }
+--end
 
-vim.g.startify_custom_header = "startify#center(luaeval('StartifyHeader()'))"
+--vim.g.startify_custom_header = "startify#center(luaeval('StartifyHeader()'))"
 
-vim.g.startify_relative_path = 1
-vim.g.startify_use_env = 1
-vim.g.startify_change_to_dir = 1
-vim.g.startify_change_to_vcs_root = 1
-vim.g.startify_relative_path = 1
-vim.g.startify_session_autoload = 1
-vim.g.startify_session_before_save = { 'silent! tabdo NvimTreeClose' }
-vim.g.startify_session_persistence = 1
+--vim.g.startify_relative_path = 1
+--vim.g.startify_use_env = 1
+--vim.g.startify_change_to_dir = 1
+--vim.g.startify_change_to_vcs_root = 1
+--vim.g.startify_relative_path = 1
+--vim.g.startify_session_autoload = 1
+--vim.g.startify_session_before_save = { 'silent! tabdo NvimTreeClose' }
+--vim.g.startify_session_persistence = 1
 
-local function startifyExtras()
-    return {
-        {
-        line = 'golang - local',
-        path = os.getenv("GOME")
-        },
-        {
-        line = 'nvim config',
-        path = "~/.config/nvim/"
-        },
-    }
-end
+--local function startifyExtras()
+--    return {
+--        {
+--        line = 'golang - local',
+--        path = os.getenv("GOME")
+--        },
+--        {
+--        line = 'nvim config',
+--        path = "~/.config/nvim/"
+--        },
+--    }
+--end
 
-vim.g.startify_lists = {
-    {
-        type = 'dir',
-        header = {' - MRU ' .. os.getenv("PWD")}
-    },
-    {
-        type = startifyExtras,
-        header = {' - Bookmarks'},
-    },
-    {
-        type = 'files',
-        header = {' - MRU'}
-    },
-    {
-        type = 'sessions',
-        header = {' - Sessions'}
-    },
-}
+--vim.g.startify_lists = {
+--    {
+--        type = 'dir',
+--        header = {' - MRU ' .. os.getenv("PWD")}
+--    },
+--    {
+--        type = startifyExtras,
+--        header = {' - Bookmarks'},
+--    },
+--    {
+--        type = 'files',
+--        header = {' - MRU'}
+--    },
+--    {
+--        type = 'sessions',
+--        header = {' - Sessions'}
+--    },
+--}
 
+----}}}
+
+-- Toggleterm{{{
+require("toggleterm").setup{}
 --}}}
-
--- toggleterm {{{
-require("toggleterm").setup{
-  -- size can be a number or function which is passed the current terminal
-  -- on_open = fun(t: Terminal), -- function to run when the terminal opens
-  -- on_close = fun(t: Terminal), -- function to run when the terminal closes
-  hide_numbers = true, -- hide the number column in toggleterm buffers
-  shade_filetypes = {},
-  shade_terminals = true,
-  shading_factor = '0.8', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
-  start_in_insert = true,
-  -- insert_mappings = false, -- whether or not the open mapping applies in insert mode
-  terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-  persist_size = true,
-  direction = 'horizontal',
-  close_on_exit = true, -- close the terminal window when the process exits
-  shell = vim.o.shell, -- change the default shell
-  -- This field is only relevant if direction is set to 'float'
-  float_opts = {
-    -- The border key is *almost* the same as 'nvim_open_win'
-    -- see :h nvim_open_win for details on borders however
-    -- the 'curved' border is a custom border type
-    -- not natively supported but implemented in this plugin.
-    border = 'single', -- | 'double' | 'shadow' | 'curved' | ... other options supported by win open
-    -- width = <value>,
-    height = 15,
-    winblend = 3,
-    highlights = {
-      border = "Normal",
-      background = "Normal",
-    }
-  }
-}
--- }}}
 
 -- Treesitter{{{
 require'nvim-treesitter.configs'.setup {
@@ -773,6 +718,32 @@ require'nvim-treesitter.configs'.setup {
 -- vsnip {{{
 vim.g.vsnip_snippet_dir = os.getenv('HOME') .. "/.config/nvim/vsnip/"
 -- }}}
+
+-- vim-markdown {{{
+vim.g.vim_markdown_folding_disabled = 1
+vim.g.vim_markdown_no_default_key_mappings = 1
+vim.g.vim_markdown_conceal = 1
+vim.g.vim_markdown_conceal_code_blocks = 0
+vim.g.vim_markdown_strikethrough = 1
+
+vim.o.conceallevel = 2
+-- }}}
+
+-- vimiwki {{{
+vim.g.vimwiki_key_mappings = {
+    all_maps = 1,
+    global = 1,
+    headers = 1,
+    text_objs = 1,
+    table_format = 1,
+    table_mappings = 0,
+    lists = 1,
+    links = 0,
+    html = 1,
+    mouse = 0,
+}
+-- }}}
+
 
 -- which-key{{{
 require("which-key").setup{

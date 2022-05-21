@@ -1,6 +1,7 @@
 " runtime after/ftplugin/go.lua
+packadd go.nvim
 
-autocmd BufWritePre *.go lua Org_imports(3000)
+autocmd BufWritePre *.go GoImport
 autocmd BufWritePre *.go,go.mod lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " autocmd BufWritePre *.go :silent! lua require('go.format').goimport()

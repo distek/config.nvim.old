@@ -6,7 +6,7 @@ vim.g.maplocalleader = " "
 -- Sets{{{
 vim.o.mouse = "a"
 vim.o.autoread = true
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.showtabline = 2
 vim.o.foldmethod = "marker"
 vim.o.showbreak="↪ "
@@ -32,7 +32,7 @@ vim.o.numberwidth = 5
 vim.o.signcolumn = "yes:2"
 vim.o.cursorline = true
 vim.o.scrolloff=2
-vim.o.laststatus=2
+vim.o.startofline = 0
 vim.o.modeline = true
 vim.o.modelines = 5
 vim.o.showmode = false
@@ -49,6 +49,18 @@ vim.o.fillchars = "vert:│,fold:-,eob: "
 vim.o.pumblend = 15
 vim.opt.spell = false
 vim.opt.spelllang = { 'en_us' }
+
+vim.opt.laststatus = 3
+
+vim.opt.fillchars:append({
+    horiz = '━',
+    horizup = '┻',
+    horizdown = '┳',
+    vert = '┃',
+    vertleft = '┨',
+    vertright = '┣',
+    verthoriz = '╋',
+})
 
 vim.cmd[[set sessionoptions-=blank]]
 

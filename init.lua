@@ -1,11 +1,11 @@
 -- init.lua
 
-require("plugins")
 require("defaults")
+require("plugins")
+require("plugin-confs")
 require("lsp")
 require("util")
-require("plugin-confs")
-require("language-confs")
 require("mappings")
 require("theme")
 require("lualine-conf")
+require("defaults")

@@ -73,6 +73,11 @@ table.insert(runtime_path, ".config/nvim/lua/?/init.lua")
 
 require'lsp_signature'.on_attach()
 --}}}
+
+-- clangd {{{
+require'lspconfig'.clangd.setup{}
+-- }}}
+
 --}}}
 
 -- Float border {{{

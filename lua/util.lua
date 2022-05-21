@@ -76,7 +76,7 @@ end
 _G.nvimTreeToggle = function()
     vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
 
-    vim.cmd[[NvimTreeToggle]]
+    require'nvim-tree'.toggle()
 end
 
 _G.vistaToggle = function()
@@ -87,8 +87,12 @@ end
 
 _G.toggleTerm = function()
     local doWinCmd = false
+
+    local nvimTree = require"nvim-tree"
+    local nvimTreeView = require"nvim-tree.view"
+
     if vim.g.nvimtreeOpen then
-        vim.cmd[[NvimTreeClose]]
+        nvimTreeView.close()
     end
 
     if vim.g.vistaOpen then
@@ -99,7 +103,7 @@ _G.toggleTerm = function()
 
     if vim.g.nvimtreeOpen then
         doWinCmd = true
-        vim.cmd[[NvimTreeOpen]]
+        nvimTree.toggle()
     end
 
     if vim.g.vistaOpen then
